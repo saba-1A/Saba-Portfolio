@@ -1,0 +1,96 @@
+import React from 'react';
+import { motion } from 'framer-motion'; // Assuming you have framer-motion installed since Hero uses it
+
+interface Project {
+  id: number;
+  title: string;
+  img: string;
+  aspect: string;
+}
+
+// COLUMN 1 (Left)
+const PROJECTS: Project[] = [
+  { id: 1, title: "Artisan", img: "/artisan.mp4", aspect: "aspect-video" },
+  { id: 2, title: "SpecFlow ", img: "/specflow.mp4", aspect: "aspect-video" },
+];
+
+const ProjectCard = ({ project }: { project: Project }) => (
+  <div className={`group relative w-full bg-white overflow-hidden rounded-2xl cursor-pointer ${project.aspect} shadow-2xl shadow-black/5 border border-white/50 transition-all duration-700`}>
+    <video
+      src={project.img}
+      autoPlay
+      loop
+      muted
+      playsInline
+      className="w-full h-full object-cover transition-all duration-700 ease-out"
+    />
+    
+    {/* Overlay */}
+    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+    {/* Floating Glass Pill - Back to original design */}
+    <div className="absolute bottom-6 left-6 right-6 z-10">
+      <div className="w-full py-4 px-6 rounded-full flex items-center justify-between opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 bg-white/90 backdrop-blur-md border border-white/60 shadow-xl">
+        <span className="text-[10px] tracking-[0.2em] text-[#111] uppercase font-satoshi font-black">
+          {project.title} — View Casestudy
+        </span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#111" strokeWidth="3">
+          <path d="M7 17L17 7M17 7H7M17 7V17" />
+        </svg>
+      </div>
+    </div>
+  </div>
+);
+
+export const GallerySection: React.FC = () => {
+  return (
+    // Changed bg to match Hero (#F0F0F2) and added relative for background layers
+    <section className="relative pt-32 pb-32 px-4 md:px-8 w-full bg-[#F0F0F2] text-[#1a1a1a] overflow-hidden">
+      
+      {/* ================= BACKGROUND LAYERS (From Hero) ================= */}
+      
+      {/* 1. Radial Fade - Blends edges to grey */}
+      <div className="absolute inset-0 z-[1] bg-[radial-gradient(circle_at_center,transparent_0%,#F0F0F2_85%)] pointer-events-none" />
+
+      {/* 2. Noise Texture - Uniform grain */}
+      <div className="absolute inset-0 z-[2] opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay"></div>
+
+      {/* ================= CONTENT ================= */}
+      <div className="relative z-10 max-w-[1400px] mx-auto">
+        
+        {/* Optional Section Header to tie it together */}
+        <div className="flex flex-col items-center mb-24 text-center">
+             <h2 className="font-satoshi font-bold text-[40px] md:text-[60px] leading-tight text-[#111] mb-6">
+                Selected Work
+             </h2>
+             <p className="font-inter text-gray-600 max-w-[500px]">
+                A collection of digital experiences crafted with precision and passion.
+             </p>
+        </div>
+
+        {/* CLEAN 2-COLUMN GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+          {PROJECTS.map((p) => (
+            <ProjectCard key={p.id} project={p} />
+          ))}
+        </div>
+
+        {/* FOOTER ACTIONS */}
+        <div className="mt-32 flex flex-col items-center gap-8">
+          <div className="flex items-center gap-8">
+            {/* Button 1: Text Link */}
+            <button className="text-[10px] tracking-[0.3em] font-satoshi font-bold uppercase text-gray-500 border-b border-transparent hover:border-gray-800 pb-1 hover:text-black transition-all duration-300">
+              All Projects
+            </button>
+            
+            {/* Button 2: Primary Action (Matches Hero 'Get Started') */}
+            <button className="bg-[#111] text-white px-8 py-3 rounded-full text-[10px] tracking-[0.3em] font-satoshi font-bold uppercase shadow-[0_10px_20px_-5px_rgba(0,0,0,0.2)] hover:scale-105 hover:shadow-[0_20px_30px_-10px_rgba(0,0,0,0.3)] transition-all duration-300">
+              Book a Free Call
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
+};

@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: black;
+  color: white;
+}
+
+/* =========================================
+   1. INFINITE TICKER (Updated for BrandTicker)
+   ========================================= */
+
+/* The animation required by BrandTicker.tsx */
+@keyframes infinite-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+.animate-infinite-scroll {
+  /* 25s = Speed. Adjust lower to go faster. */
+  animation: infinite-scroll 40s linear infinite;
+}
+
+/* Pause animation when user hovers over the brands */
+.group:hover .animate-infinite-scroll {
+  animation-play-state: paused;
+}
+
+/* Your gradient fade effect - I made this a utility class */
+.mask-gradient {
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+
+/* =========================================
+   2. GALLERY & IMAGES
+   ========================================= */
+
+/* 
+   I kept your custom cubic-bezier! 
+   Add className="gallery-img" to your ProjectCard <img> tags 
+   if you want this specific slow-smooth easing.
+*/
+.gallery-img {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+}
+
+/* =========================================
+   3. GLASS UI ELEMENTS
+   ========================================= */
+
+/* Kept your exact Glass Bar - it is perfect */
+.glass-bar {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.glass-bar:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px); /* Added a tiny lift on hover */
+}
