@@ -6,12 +6,13 @@ interface Project {
   title: string;
   img: string;
   aspect: string;
+  link: string;
 }
 
 // COLUMN 1 (Left)
 const PROJECTS: Project[] = [
-  { id: 1, title: "Artisan", img: "/artisan.mp4", aspect: "aspect-video" },
-  { id: 2, title: "SpecFlow ", img: "/specflow.mp4", aspect: "aspect-video" },
+  { id: 1, title: "Artisan", img: "/artisan.mp4", aspect: "aspect-video", link: "https://artisan-food-app.vercel.app/" },
+  { id: 2, title: "SpecFlow ", img: "/specflow.mp4", aspect: "aspect-video", link: "https://spec-flow-iota.vercel.app/" },
 ];
 
 // Third project shown centered below the main grid - slideshow of two images
@@ -38,20 +39,26 @@ const ProjectCard = ({ project }: { project: Project }) => (
 
     {/* Floating Glass Pill - Back to original design */}
     <div className="absolute bottom-6 left-6 right-6 z-10">
-      <div className="w-full py-4 px-6 rounded-full flex items-center justify-between opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 bg-white/90 backdrop-blur-md border border-white/60 shadow-xl">
+      <a
+        href={project.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="w-full py-4 px-6 rounded-full flex items-center justify-between opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 bg-white/90 backdrop-blur-md border border-white/60 shadow-xl"
+      >
         <span className="text-[10px] tracking-[0.2em] text-[#111] uppercase font-satoshi font-black">
           {project.title} — View Casestudy
         </span>
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#111" strokeWidth="3">
           <path d="M7 17L17 7M17 7H7M17 7V17" />
         </svg>
-      </div>
+      </a>
     </div>
   </div>
 );
 
 const SlideshowCard = ({ project }: { project: { id: number; title: string; images: string[]; aspect: string } }) => {
   const [activeIndex, setActiveIndex] = React.useState(0);
+  const [showToast, setShowToast] = React.useState(false);
 
   React.useEffect(() => {
     const interval = setInterval(() => {
@@ -60,8 +67,16 @@ const SlideshowCard = ({ project }: { project: { id: number; title: string; imag
     return () => clearInterval(interval);
   }, [project.images.length]);
 
+  const handleClick = () => {
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 2500);
+  };
+
   return (
-    <div className={`group relative w-full bg-white overflow-hidden rounded-2xl cursor-pointer ${project.aspect} shadow-2xl shadow-black/5 border border-white/50 transition-all duration-700`}>
+    <div
+      onClick={handleClick}
+      className={`group relative w-full bg-white overflow-hidden rounded-2xl cursor-pointer ${project.aspect} shadow-2xl shadow-black/5 border border-white/50 transition-all duration-700`}
+    >
       {project.images.map((src, index) => (
         <img
           key={src}
@@ -87,6 +102,15 @@ const SlideshowCard = ({ project }: { project: { id: number; title: string; imag
           </svg>
         </div>
       </div>
+
+      {/* Toast */}
+      <div
+        className={`absolute top-6 left-1/2 -translate-x-1/2 z-20 px-5 py-2.5 rounded-full bg-[#111] text-white text-[11px] tracking-[0.15em] font-satoshi font-bold uppercase shadow-xl transition-all duration-300 ${
+          showToast ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-3 pointer-events-none"
+        }`}
+      >
+        Coming Soon
+      </div>
     </div>
   );
 };
@@ -94,7 +118,7 @@ const SlideshowCard = ({ project }: { project: { id: number; title: string; imag
 export const GallerySection: React.FC = () => {
   return (
     // Changed bg to match Hero (#F0F0F2) and added relative for background layers
-    <section className="relative pt-32 pb-32 px-4 md:px-8 w-full bg-[#F0F0F2] text-[#1a1a1a] overflow-hidden">
+    <section id="projects" className="relative pt-32 pb-32 px-4 md:px-8 w-full bg-[#F0F0F2] text-[#1a1a1a] overflow-hidden">
       
       {/* ================= BACKGROUND LAYERS (From Hero) ================= */}
       
@@ -133,14 +157,14 @@ export const GallerySection: React.FC = () => {
         <div className="mt-32 flex flex-col items-center gap-8">
           <div className="flex items-center gap-8">
             {/* Button 1: Text Link */}
-            <button className="text-[10px] tracking-[0.3em] font-satoshi font-bold uppercase text-gray-500 border-b border-transparent hover:border-gray-800 pb-1 hover:text-black transition-all duration-300">
+            <a href="#projects" className="text-[10px] tracking-[0.3em] font-satoshi font-bold uppercase text-gray-500 border-b border-transparent hover:border-gray-800 pb-1 hover:text-black transition-all duration-300">
               All Projects
-            </button>
+            </a>
             
             {/* Button 2: Primary Action (Matches Hero 'Get Started') */}
-            <button className="bg-[#111] text-white px-8 py-3 rounded-full text-[10px] tracking-[0.3em] font-satoshi font-bold uppercase shadow-[0_10px_20px_-5px_rgba(0,0,0,0.2)] hover:scale-105 hover:shadow-[0_20px_30px_-10px_rgba(0,0,0,0.3)] transition-all duration-300">
+            <a href="#contact" className="bg-[#111] text-white px-8 py-3 rounded-full text-[10px] tracking-[0.3em] font-satoshi font-bold uppercase shadow-[0_10px_20px_-5px_rgba(0,0,0,0.2)] hover:scale-105 hover:shadow-[0_20px_30px_-10px_rgba(0,0,0,0.3)] transition-all duration-300 inline-block">
               Book a Free Call
-            </button>
+            </a>
           </div>
         </div>
 

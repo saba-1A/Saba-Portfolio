@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [hoveredLink, setHoveredLink] = useState(null);
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -42,7 +42,7 @@ export const Navbar = () => {
           `}
         >
           {/* ================= LEFT — LOGO ================= */}
-          <a href="#" className="flex items-center gap-2.5 group relative pl-2">
+          <a href="#hero" className="flex items-center gap-2.5 group relative pl-2">
             <div className="relative flex items-center justify-center">
               <div className="w-10 h-10 bg-[#1a1a1a] rounded-full flex items-center justify-center text-white relative z-10 shadow-lg group-hover:scale-105 transition-transform duration-300">
                 <span className="font-bold text-sm">S</span>

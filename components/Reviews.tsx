@@ -30,7 +30,7 @@ const testimonials =[
 ];
 
 const stats =[
-  { value: 120, suffix: "+", label: "Projects Delivered" },
+  { value: 5, suffix: "+", label: "Projects Delivered" },
   { value: 98, suffix: "%", label: "Code Efficiency" },
   { value: 5, suffix: "+", label: "Client Satisfaction" },
 ];
@@ -65,7 +65,7 @@ function Counter({ value, suffix = "" }: { value: number; suffix?: string }) {
 
 export default function Reviews() {
   return (
-    <section className="relative bg-[#F4F4F6] text-[#111] py-24 px-6 overflow-hidden font-sans selection:bg-black selection:text-white">
+    <section id="testimonials" className="relative bg-[#F4F4F6] text-[#111] py-24 px-6 overflow-hidden font-sans selection:bg-black selection:text-white">
       
       {/* Background Texture & Soft Gradients */}
       <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-multiply"></div>
@@ -151,12 +151,12 @@ export default function Reviews() {
               transition={{ delay: 0.3 }}
               className="flex flex-wrap gap-4 pt-2"
             >
-              <button className="group relative px-8 py-4 rounded-full bg-[#111] text-white font-medium overflow-hidden transition-all hover:scale-[1.02] hover:shadow-xl hover:shadow-black/10">
+              <a href="#contact" className="group relative px-8 py-4 rounded-full bg-[#111] text-white font-medium overflow-hidden transition-all hover:scale-[1.02] hover:shadow-xl hover:shadow-black/10 inline-flex items-center">
                 <span className="relative z-10 flex items-center gap-2">
-                  Book a Free Call 
+                  Book a Free Call
                   <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </span>
-              </button>
+              </a>
               
               <button className="px-8 py-4 rounded-full bg-transparent border border-gray-300 text-[#111] font-medium hover:bg-white/50 hover:border-gray-400 transition-all">
                 View Portfolio

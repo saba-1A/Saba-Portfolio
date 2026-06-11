@@ -26,12 +26,13 @@ export default function Footer() {
 
   return (
     /* ================= THE REVEAL WRAPPER ================= */
-    <div 
+    <div
       ref={containerRef}
+      id="contact"
       className="relative h-[100vh] min-h-[700px]"
       style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
     >
-      
+
       {/* ================= FIXED FOOTER ================= */}
       <footer className="fixed bottom-0 w-full h-[100vh] min-h-[700px] bg-[#F0F0F2] text-[#1a1a1a] font-sans px-6 overflow-hidden selection:bg-black/10 selection:text-black flex flex-col justify-center">
         

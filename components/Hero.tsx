@@ -18,7 +18,7 @@ const TECH_STACK = [
 
 export const Hero = () => {
   return (
-    <div className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden bg-[#F0F0F2] text-[#1a1a1a] font-sans selection:bg-black/10 selection:text-black">
+    <div id="hero" className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden bg-[#F0F0F2] text-[#1a1a1a] font-sans selection:bg-black/10 selection:text-black">
       
       {/* ================= STYLES & FONTS ================= */}
       <style>
@@ -108,7 +108,7 @@ export const Hero = () => {
            transition={{ delay: 0.8, duration: 0.8 }}
            className="flex flex-col sm:flex-row items-center gap-5 mt-12 mb-20"
         >
-            <a href="#start" className="group relative px-8 py-4 bg-[#111] text-white rounded-full font-medium text-[16px] tracking-wide overflow-hidden shadow-[0_10px_20px_-5px_rgba(0,0,0,0.2)] transition-all hover:scale-105 hover:shadow-[0_20px_30px_-10px_rgba(0,0,0,0.3)]">
+            <a href="#contact" className="group relative px-8 py-4 bg-[#111] text-white rounded-full font-medium text-[16px] tracking-wide overflow-hidden shadow-[0_10px_20px_-5px_rgba(0,0,0,0.2)] transition-all hover:scale-105 hover:shadow-[0_20px_30px_-10px_rgba(0,0,0,0.3)]">
               <span className="relative z-10 flex items-center gap-2">
                 Get Started Now
               </span>

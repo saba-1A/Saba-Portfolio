@@ -53,7 +53,7 @@ const itemVariants = {
 
 export default function ServicesSection() {
   return (
-    <section className="relative bg-[#F0F0F2] text-[#1a1a1a] min-h-screen px-6 py-24 md:px-12 lg:px-20 overflow-hidden">
+    <section id="services" className="relative bg-[#F0F0F2] text-[#1a1a1a] min-h-screen px-6 py-24 md:px-12 lg:px-20 overflow-hidden">
       
       {/* ================= BACKGROUND LAYERS ================= */}
       <div className="absolute inset-0 z-[1] bg-[radial-gradient(circle_at_top_right,transparent_0%,#F0F0F2_80%)] pointer-events-none" />
@@ -102,10 +102,10 @@ export default function ServicesSection() {
 
             {/* Buttons */}
             <div className="flex flex-wrap gap-3">
-              <button className="group relative px-7 py-3 rounded-full bg-[#111] text-white overflow-hidden shadow-lg shadow-black/10 transition-transform hover:-translate-y-0.5 active:scale-95">
+              <a href="#contact" className="group relative px-7 py-3 rounded-full bg-[#111] text-white overflow-hidden shadow-lg shadow-black/10 transition-transform hover:-translate-y-0.5 active:scale-95 inline-flex items-center">
                  <span className="relative z-10 text-[13px] font-bold tracking-wide">Book a Free Call</span>
                  <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-              </button>
+              </a>
 
               <button className="px-7 py-3 rounded-full bg-white border border-black/5 text-[#111] shadow-sm hover:shadow-md hover:bg-gray-50 transition-all duration-300 active:scale-95">
                  <span className="text-[13px] font-bold tracking-wide">See Projects</span>

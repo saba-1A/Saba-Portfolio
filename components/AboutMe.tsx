@@ -14,7 +14,7 @@ const EXPERIENCE = [
 
 export const AboutMe: React.FC = () => {
   return (
-    <section className="relative w-full py-24 px-4 md:px-8 bg-[#F0F0F2] text-[#1a1a1a] overflow-hidden">
+    <section id="about" className="relative w-full py-24 px-4 md:px-8 bg-[#F0F0F2] text-[#1a1a1a] overflow-hidden">
       
       {/* ================= BACKGROUND LAYERS (Consistent with Hero) ================= */}
       
