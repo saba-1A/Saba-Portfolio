@@ -73,7 +73,7 @@ export default function ServicesSection() {
           >
             <div className="w-fit flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-black/5 shadow-sm mb-8">
                <div className="w-1.5 h-1.5 rounded-full bg-[#111] animate-pulse"></div>
-               <span className="text-[10px] font-bold tracking-[0.2em] text-gray-500 uppercase font-satoshi">Our Expertise</span>
+               <span className="text-[10px] font-bold tracking-[0.2em] text-gray-500 uppercase font-satoshi">Expertise</span>
             </div>
 
             <h1 className="font-satoshi text-[56px] md:text-[72px] font-bold tracking-tighter leading-[0.95] mb-6 text-[#111]">
