@@ -46,7 +46,7 @@ const ProjectCard = ({ project }: { project: Project }) => (
         className="w-full py-4 px-6 rounded-full flex items-center justify-between opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 bg-white/90 backdrop-blur-md border border-white/60 shadow-xl"
       >
         <span className="text-[10px] tracking-[0.2em] text-[#111] uppercase font-satoshi font-black">
-          {project.title} — View Casestudy
+          {project.title} — View
         </span>
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#111" strokeWidth="3">
           <path d="M7 17L17 7M17 7H7M17 7V17" />
@@ -85,7 +85,7 @@ const FeaturedCard = ({ project }: { project: { id: number; title: string; video
       <div className="absolute bottom-6 left-6 right-6 z-10">
         <div className="w-full py-4 px-6 rounded-full flex items-center justify-between opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 bg-white/90 backdrop-blur-md border border-white/60 shadow-xl">
           <span className="text-[10px] tracking-[0.2em] text-[#111] uppercase font-satoshi font-black">
-            {project.title} — View Casestudy
+            {project.title} — View
           </span>
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#111" strokeWidth="3">
             <path d="M7 17L17 7M17 7H7M17 7V17" />
