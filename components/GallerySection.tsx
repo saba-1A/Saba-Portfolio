@@ -15,11 +15,11 @@ const PROJECTS: Project[] = [
   { id: 2, title: "SpecFlow ", img: "/specflow.mp4", aspect: "aspect-video", link: "https://spec-flow-iota.vercel.app/" },
 ];
 
-// Third project shown centered below the main grid - slideshow of two images
+// Third project shown centered below the main grid
 const FEATURED_PROJECT = {
   id: 3,
   title: "Dashboard",
-  images: ["/new-project-1.jpg", "/new-project-2.jpg"],
+  video: "/dashboard.mp4",
   aspect: "aspect-video",
 };
 
@@ -56,16 +56,8 @@ const ProjectCard = ({ project }: { project: Project }) => (
   </div>
 );
 
-const SlideshowCard = ({ project }: { project: { id: number; title: string; images: string[]; aspect: string } }) => {
-  const [activeIndex, setActiveIndex] = React.useState(0);
+const FeaturedCard = ({ project }: { project: { id: number; title: string; video: string; aspect: string } }) => {
   const [showToast, setShowToast] = React.useState(false);
-
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % project.images.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [project.images.length]);
 
   const handleClick = () => {
     setShowToast(true);
@@ -77,16 +69,14 @@ const SlideshowCard = ({ project }: { project: { id: number; title: string; imag
       onClick={handleClick}
       className={`group relative w-full bg-white overflow-hidden rounded-2xl cursor-pointer ${project.aspect} shadow-2xl shadow-black/5 border border-white/50 transition-all duration-700`}
     >
-      {project.images.map((src, index) => (
-        <img
-          key={src}
-          src={src}
-          alt={`${project.title} slide ${index + 1}`}
-          className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 ease-out ${
-            index === activeIndex ? "opacity-100" : "opacity-0"
-          }`}
-        />
-      ))}
+      <video
+        src={project.video}
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="w-full h-full object-cover transition-all duration-700 ease-out"
+      />
 
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -150,7 +140,7 @@ export const GallerySection: React.FC = () => {
 
         {/* FEATURED PROJECT - Centered below the grid */}
         <div className="mt-10 max-w-[700px] mx-auto">
-          <SlideshowCard project={FEATURED_PROJECT} />
+          <FeaturedCard project={FEATURED_PROJECT} />
         </div>
 
         {/* FOOTER ACTIONS */}
