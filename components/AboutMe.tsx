@@ -98,13 +98,11 @@ export const AboutMe: React.FC = () => {
               whileHover={{ scale: 0.98 }}
               transition={{ duration: 0.5, ease: "circOut" }}
             >
-              <motion.img 
-                // Starts grayscale, color on hover
-                initial={{ filter: "grayscale(100%) contrast(1.1)" }}
-                whileHover={{ scale: 1.05, filter: "grayscale(0%) contrast(1)" }}
+              <motion.img
+                whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.7 }}
-                src="https://framerusercontent.com/images/roWFLkzHAotwSx5UxGPxpxMeA.jpg" 
-                alt="Saba Portrait" 
+                src="https://framerusercontent.com/images/roWFLkzHAotwSx5UxGPxpxMeA.jpg"
+                alt="Saba Portrait"
                 className="w-full h-auto object-cover aspect-[3/4] md:aspect-[4/5]"
               />
             </motion.div>

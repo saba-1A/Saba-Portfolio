@@ -98,7 +98,7 @@ export const ProcessSection: React.FC = () => {
             <img 
               src="https://i.pinimg.com/1200x/de/ff/64/deff64ee22fcca4c6179c975a1b1f5e9.jpg" 
               alt="Digital Product Design Process" 
-              className="w-full h-full object-cover transition-all duration-700 filter grayscale contrast-[1.1] group-hover:grayscale-0 group-hover:contrast-100"
+              className="w-full h-full object-cover transition-all duration-700"
             />
 
             {/* Dark Gradient Overlay for text readability */}

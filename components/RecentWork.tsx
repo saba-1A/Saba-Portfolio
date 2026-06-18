@@ -7,26 +7,34 @@ const PROJECTS = [
     image: "/artisan2.png",
     link: "https://artisan-food-app.vercel.app/"
   },
-
-  {
-    title: "Dashboard",
-    image: "/new-project-2.jpg",
-    link: null
-  },
   {
     title: "Spec Flow Ai",
     image: "/spec-flow-ai2.webp",
     link: "https://spec-flow-iota.vercel.app/"
+  },
+  {
+    title: "Dashboard",
+    image: "/new-project-2.jpg",
+    link: null
   }
 ];
 
+const PAGE_SIZE = 2;
+
 export const RecentWorks: React.FC = () => {
   const [toastIndex, setToastIndex] = React.useState<number | null>(null);
+  const [page, setPage] = React.useState(0);
+
+  const totalPages = Math.ceil(PROJECTS.length / PAGE_SIZE);
+  const visibleProjects = PROJECTS.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE);
 
   const handleComingSoon = (index: number) => {
     setToastIndex(index);
     setTimeout(() => setToastIndex(null), 2500);
   };
+
+  const goPrev = () => setPage((p) => (p - 1 + totalPages) % totalPages);
+  const goNext = () => setPage((p) => (p + 1) % totalPages);
 
   return (
     <section className="relative w-full py-24 px-4 md:px-8 bg-[#F0F0F2] text-[#1a1a1a] overflow-hidden">
@@ -40,28 +48,47 @@ export const RecentWorks: React.FC = () => {
       <div className="absolute inset-0 z-[2] opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay"></div>
 
       {/* ================= CONTENT ================= */}
-      <div className="relative z-10 w-full max-w-[1250px] mx-auto">
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto">
         
         {/* Header */}
-        <div className="flex items-center gap-3 mb-12 group cursor-pointer w-fit">
-          <h3 className="text-gray-500 text-lg font-medium group-hover:text-[#111] transition-colors font-satoshi">
-            Recent Works
-          </h3>
-          <motion.div 
-            whileHover={{ x: 3 }} // Changed from y to x for a "forward" motion feels better here
-            className="w-8 h-8 rounded-full border border-black/10 flex items-center justify-center bg-white shadow-sm group-hover:border-black/30 transition-colors"
-          >
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 1V11M6 11L1 6M6 11L11 6" stroke="#111" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="rotate-[-90deg] origin-center" /> 
-              {/* Rotated arrow to point right, or remove rotation to keep pointing down */}
-            </svg>
-          </motion.div>
+        <div className="flex items-center justify-between mb-12">
+          <div className="flex items-center gap-3 w-fit">
+            <h3 className="text-gray-500 text-lg font-medium font-satoshi">
+              Recent Works
+            </h3>
+          </div>
+
+          {/* Carousel Arrows */}
+          {totalPages > 1 && (
+            <div className="flex items-center gap-3">
+              <button
+                onClick={goPrev}
+                aria-label="Previous projects"
+                className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center bg-white shadow-sm hover:border-black/30 hover:bg-gray-50 transition-colors"
+              >
+                <svg width="14" height="14" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 1V11M6 11L1 6M6 11L11 6" stroke="#111" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="rotate-90 origin-center" />
+                </svg>
+              </button>
+              <button
+                onClick={goNext}
+                aria-label="Next projects"
+                className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center bg-white shadow-sm hover:border-black/30 hover:bg-gray-50 transition-colors"
+              >
+                <svg width="14" height="14" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 1V11M6 11L1 6M6 11L11 6" stroke="#111" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="-rotate-90 origin-center" />
+                </svg>
+              </button>
+            </div>
+          )}
         </div>
 
-        {/* Grid: 3 Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {PROJECTS.map((project, index) => (
-            <motion.div 
+        {/* Grid: 2 Columns, paginated */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          {visibleProjects.map((project, i) => {
+            const index = page * PAGE_SIZE + i;
+            return (
+            <motion.div
               key={index}
               className="relative group aspect-video overflow-hidden rounded-2xl bg-white shadow-2xl shadow-black/5 border border-white/50"
               whileHover="hover"
@@ -134,7 +161,8 @@ export const RecentWorks: React.FC = () => {
               </div>
 
             </motion.div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

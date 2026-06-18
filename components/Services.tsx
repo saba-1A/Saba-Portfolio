@@ -129,7 +129,7 @@ export default function ServicesSection() {
               <img 
                 src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop" 
                 alt="Development Workflow" 
-                className="w-full h-full object-cover transition-all duration-700 filter grayscale contrast-[1.1] group-hover:grayscale-0 group-hover:contrast-100 group-hover:scale-105"
+                className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
               />
               
               {/* Overlay Content */}

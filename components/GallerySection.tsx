@@ -6,60 +6,29 @@ interface Project {
   title: string;
   img: string;
   aspect: string;
-  link: string;
+  link: string | null;
 }
 
 // COLUMN 1 (Left)
 const PROJECTS: Project[] = [
-  { id: 1, title: "Artisan", img: "/artisan.mp4", aspect: "aspect-video", link: "https://artisan-food-app.vercel.app/" },
+  { id: 1, title: "Dashboard", img: "/dashboard%20redesign.mp4", aspect: "aspect-video", link: null },
   { id: 2, title: "SpecFlow ", img: "/specflow.mp4", aspect: "aspect-video", link: "https://spec-flow-iota.vercel.app/" },
 ];
 
 // Third project shown centered below the main grid
-const FEATURED_PROJECT = {
+const FEATURED_PROJECT: Project = {
   id: 3,
-  title: "Dashboard",
-  video: "/dashboard.mp4",
+  title: "Artisan",
+  img: "/artisan.mp4",
   aspect: "aspect-video",
+  link: "https://artisan-food-app.vercel.app/",
 };
 
-const ProjectCard = ({ project }: { project: Project }) => (
-  <div className={`group relative w-full bg-white overflow-hidden rounded-2xl cursor-pointer ${project.aspect} shadow-2xl shadow-black/5 border border-white/50 transition-all duration-700`}>
-    <video
-      src={project.img}
-      autoPlay
-      loop
-      muted
-      playsInline
-      className="w-full h-full object-cover transition-all duration-700 ease-out"
-    />
-
-    {/* Overlay */}
-    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-    {/* Floating Glass Pill - Back to original design */}
-    <div className="absolute bottom-6 left-6 right-6 z-10">
-      <a
-        href={project.link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="w-full py-4 px-6 rounded-full flex items-center justify-between opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 bg-white/90 backdrop-blur-md border border-white/60 shadow-xl"
-      >
-        <span className="text-[10px] tracking-[0.2em] text-[#111] uppercase font-satoshi font-black">
-          {project.title} — View
-        </span>
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#111" strokeWidth="3">
-          <path d="M7 17L17 7M17 7H7M17 7V17" />
-        </svg>
-      </a>
-    </div>
-  </div>
-);
-
-const FeaturedCard = ({ project }: { project: { id: number; title: string; video: string; aspect: string } }) => {
+const ProjectCard = ({ project }: { project: Project }) => {
   const [showToast, setShowToast] = React.useState(false);
 
   const handleClick = () => {
+    if (project.link) return;
     setShowToast(true);
     setTimeout(() => setShowToast(false), 2500);
   };
@@ -70,7 +39,7 @@ const FeaturedCard = ({ project }: { project: { id: number; title: string; video
       className={`group relative w-full bg-white overflow-hidden rounded-2xl cursor-pointer ${project.aspect} shadow-2xl shadow-black/5 border border-white/50 transition-all duration-700`}
     >
       <video
-        src={project.video}
+        src={project.img}
         autoPlay
         loop
         muted
@@ -83,24 +52,42 @@ const FeaturedCard = ({ project }: { project: { id: number; title: string; video
 
       {/* Floating Glass Pill - Back to original design */}
       <div className="absolute bottom-6 left-6 right-6 z-10">
-        <div className="w-full py-4 px-6 rounded-full flex items-center justify-between opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 bg-white/90 backdrop-blur-md border border-white/60 shadow-xl">
-          <span className="text-[10px] tracking-[0.2em] text-[#111] uppercase font-satoshi font-black">
-            {project.title} — View
-          </span>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#111" strokeWidth="3">
-            <path d="M7 17L17 7M17 7H7M17 7V17" />
-          </svg>
-        </div>
+        {project.link ? (
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full py-4 px-6 rounded-full flex items-center justify-between opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 bg-white/90 backdrop-blur-md border border-white/60 shadow-xl"
+          >
+            <span className="text-[10px] tracking-[0.2em] text-[#111] uppercase font-satoshi font-black">
+              {project.title} — View
+            </span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#111" strokeWidth="3">
+              <path d="M7 17L17 7M17 7H7M17 7V17" />
+            </svg>
+          </a>
+        ) : (
+          <div className="w-full py-4 px-6 rounded-full flex items-center justify-between opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 bg-white/90 backdrop-blur-md border border-white/60 shadow-xl">
+            <span className="text-[10px] tracking-[0.2em] text-[#111] uppercase font-satoshi font-black">
+              {project.title} — View
+            </span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#111" strokeWidth="3">
+              <path d="M7 17L17 7M17 7H7M17 7V17" />
+            </svg>
+          </div>
+        )}
       </div>
 
       {/* Toast */}
-      <div
-        className={`absolute top-6 left-1/2 -translate-x-1/2 z-20 px-5 py-2.5 rounded-full bg-[#111] text-white text-[11px] tracking-[0.15em] font-satoshi font-bold uppercase shadow-xl transition-all duration-300 ${
-          showToast ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-3 pointer-events-none"
-        }`}
-      >
-        Coming Soon
-      </div>
+      {!project.link && (
+        <div
+          className={`absolute top-6 left-1/2 -translate-x-1/2 z-20 px-5 py-2.5 rounded-full bg-[#111] text-white text-[11px] tracking-[0.15em] font-satoshi font-bold uppercase shadow-xl transition-all duration-300 ${
+            showToast ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-3 pointer-events-none"
+          }`}
+        >
+          Coming Soon
+        </div>
+      )}
     </div>
   );
 };
@@ -140,7 +127,7 @@ export const GallerySection: React.FC = () => {
 
         {/* FEATURED PROJECT - Centered below the grid */}
         <div className="mt-10 max-w-[700px] mx-auto">
-          <FeaturedCard project={FEATURED_PROJECT} />
+          <ProjectCard project={FEATURED_PROJECT} />
         </div>
 
         {/* FOOTER ACTIONS */}
